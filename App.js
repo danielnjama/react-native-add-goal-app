@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
-import { Button, FlatList, StyleSheet, TextInput, View } from "react-native";
+import { Button, FlatList, StyleSheet, View } from "react-native";
 import GoalItem from "./components/GoalItem";
 import GoalInput from "./components/GoalInput";
 
@@ -17,11 +17,16 @@ export default function App() {
   }
 
   function addGoalHandler(enteredGoalText) {
-    setcourseGoals((currentCourseGoals) => [
-      ...currentCourseGoals,
-      { text: enteredGoalText, id: Math.random().toString() },
-    ]);
-    endAddGoalHandler();
+    if (enteredGoalText) {
+      setcourseGoals((currentCourseGoals) => [
+        ...currentCourseGoals,
+
+        { text: enteredGoalText, id: Math.random().toString() },
+      ]);
+      endAddGoalHandler();
+    } else {
+      window.alert("A goal cannot be blank!");
+    }
   }
 
   function deleteGoalHandler(id) {
